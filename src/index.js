@@ -3,8 +3,40 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux';
 
-ReactDOM.render(
+
+//action
+const increment = () => {
+  return{
+    type: 'INCREMENT'
+  }
+}
+
+const decrement = () => {
+  return{
+    type: 'DECREMENT'
+  }
+}
+//Reducer
+const counter = (state = 0, action) => {
+  switch(action.type){
+    case 'INCREMENT':
+      return state + 1 ;
+    case 'DECREMENT' :
+      return state - 1 ; 
+  }
+};
+//store
+let store = createStore(counter);
+
+store.subscribe(() => console.log(store.getState()));
+ 
+//dispatching
+store.dispatch(increment());
+
+
+
   <React.StrictMode>
     <App />
   </React.StrictMode>,
